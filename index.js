@@ -1,13 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-const schema = require('./schema');
+const mongoose = require('mongoose');
+const app = require('./app');
 
-const app = express();
-
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
-
-app.listen(3000, () => {
-  console.log('Servidor en ejecución');
+mongoose.connect('mongodb://localhost/graphql');
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'No se pudo conectar'));
+db.once('open', () => {
+  console.log('conexión con mongoDB exitosa');
+  app.listen(3000, () => console.log('Servidor en ejecución'));
 });
