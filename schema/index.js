@@ -10,6 +10,10 @@ const rootQuery = `
     profesores: [Profesor]
     profesor(id: ID): Profesor
   }
+
+  type Mutation{
+    profesorAdd(profesor: NuevoProfesor): Profesor
+  }
 `;
 
 const schema = makeExecutableSchema({
