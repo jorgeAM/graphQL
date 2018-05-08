@@ -11,4 +11,11 @@ module.exports = `
     genero: Genero!
     cursos: [Curso]
   }
+
+  # Para tener mejor control creamos un type Input
+  input NuevoProfesor{
+    nombre: String!
+    genero: Genero
+    nacionalidad: String!
+  }
 `;
