@@ -4,10 +4,22 @@ const Comentario = require('./models/Comentario');
 
 const resolvers = {
   Query: {
-    cursos: () => Curso.find().populate('comentarios profesor'),
-    curso: (rootValue, args) => Curso.findOne({ _id: args.id }).populate('comentarios profesor'),
-    profesores: () => Profesor.find().populate('cursos'),
-    profesor: (rootValue, args) => Profesor.findOne({ _id: args.id }).populate('cursos'),
+    cursos: () => Curso.find().populate({
+      path: 'comentarios profesor',
+      populate: { path: 'cursos' },
+    }),
+    curso: (rootValue, args) => Curso.findOne({ _id: args.id }).populate({
+      path: 'comentarios profesor',
+      populate: { path: 'cursos' },
+    }),
+    profesores: () => Profesor.find().populate({
+      path: 'cursos',
+      populate: { path: 'comentarios' },
+    }),
+    profesor: (rootValue, args) => Profesor.findOne({ _id: args.id }).populate({
+      path: 'cursos',
+      populate: { path: 'comentarios' },
+    }),
   },
 };
 
