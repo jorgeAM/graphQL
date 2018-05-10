@@ -25,6 +25,7 @@ const resolvers = {
   Mutation: {
     profesorAdd: (_, args) => Profesor.create(args.profesor),
     profesorEdit: (_, args) => Profesor.findByIdAndUpdate(args.id, args.profesor),
+    profesorDelete: (_, args) => Profesor.findByIdAndRemove(args.id),
   },
 };
 
