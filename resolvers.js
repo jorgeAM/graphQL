@@ -21,6 +21,10 @@ const resolvers = {
       populate: { path: 'comentarios' },
     }),
   },
+
+  Mutation: {
+    profesorAdd: (_, args) => Profesor.create(args.profesor),
+  },
 };
 
 module.exports = resolvers;
