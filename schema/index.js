@@ -4,11 +4,14 @@ const Profesor = require('./Profesor');
 const Curso = require('./Curso');
 
 const rootQuery = `
+  union ResultadoBusqueda = Profesor | Curso
+
   type Query{
     curso(id: ID): Curso
     cursos: [Curso]
     profesores: [Profesor]
     profesor(id: ID): Profesor
+    buscar(query: String!): [ResultadoBusqueda]
   }
 
   type Mutation{
